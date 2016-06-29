@@ -66,24 +66,27 @@ class ViewController:
         let cell = tableView.dequeueReusableCellWithIdentifier("formCell") as! FormTableViewCell
         //把数组中的每一行转换成键值对
         let form = forms[indexPath.row] as! [String : AnyObject]
-        
+        //将id的整数类型转换为字符串类型 并输入列表
         let ID = form["id"]!
         let IDString = String(ID)
         cell.formIdLabel.text = IDString
-        
+        //将version的整数类型转换为字符串类型 并输入列表
         let VERSION = form["version"]!
         let VERSIONString = String(VERSION)
         cell.formVersionLabel.text = VERSIONString
-        
+        //将countru_from的空值符号转换为字符串类型 并输入列表
         let FROM = form["country_from"]!
         let FROMString = String(FROM)
         cell.formCountryfromLabel.text = FROMString
-        
+        //将name值输入列表
         cell.formNameLabel.text = form["name"] as? String
+        //将description值输入列表
         cell.formDescriptionLabel.text = form["description"] as? String
-        //cell.formCountryfromLabel.text = form["country_from"] as? String
+        //将countru_to值输入列表
         cell.formCountrytoLabel.text = form["country_to"] as? String
+        //将country值输入列表
         cell.formCountryLabel.text = form["country"] as? String
+        //返回列表值
         return cell
     }
     
