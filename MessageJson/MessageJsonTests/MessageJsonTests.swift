@@ -33,4 +33,46 @@ class MessageJsonTests: XCTestCase {
         }
     }
     
+    func testsortArray1(){
+        let array1 = ViewController.sortArray([8,6,0,9])
+        for i in 0 ..< (array1.count - 1){
+            XCTAssertTrue(array1[i + 1] >= array1[i])
+        }
+    }
+    
+    func testsortArray2(){
+        let array2 = ViewController.sortArray([2,2,2,2])
+        for i in 0 ..< (array2.count - 1){
+            XCTAssertTrue(array2[i + 1] >= array2[i])
+        }
+    }
+    
+    func testsortArray3(){
+        let array3 = ViewController.sortArray([7,0,6,5,9,6,8])
+        for i in 0 ..< (array3.count - 1){
+            XCTAssertTrue(array3[i + 1] >= array3[i])
+        }
+    }
+    
+    func testsortArray4(){
+        let array4 = ViewController.sortArray([1])
+        for i in 0 ..< (array4.count - 1){
+            XCTAssertTrue(array4[i + 1] >= array4[i])
+        }
+    }
+    
+    func testsortArray5(){
+        let array5 = ViewController.sortArray([9,5])
+        for i in 0 ..< (array5.count - 1){
+            XCTAssertTrue(array5[i + 1] >= array5[i])
+        }
+    }
+
+    
+
+    
+    
+    
+    
+    
 }

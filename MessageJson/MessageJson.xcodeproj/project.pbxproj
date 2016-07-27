@@ -16,6 +16,8 @@
 		5A0B95DA1D23B4C800EF3E02 /* MessageJsonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B95D91D23B4C800EF3E02 /* MessageJsonUITests.swift */; };
 		5A0B95E81D23B4FD00EF3E02 /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A0B95E71D23B4FD00EF3E02 /* messages.json */; };
 		5A0B95EA1D23D6F100EF3E02 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B95E91D23D6F100EF3E02 /* MessageTableViewCell.swift */; };
+		5A15D17D1D2FBFD6002B2BB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B95BB1D23B4C800EF3E02 /* ViewController.swift */; };
+		5A15D1801D30170A002B2BB4 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B95E91D23D6F100EF3E02 /* MessageTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -273,7 +275,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A15D17D1D2FBFD6002B2BB4 /* ViewController.swift in Sources */,
 				5A0B95CF1D23B4C800EF3E02 /* MessageJsonTests.swift in Sources */,
+				5A15D1801D30170A002B2BB4 /* MessageTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +494,7 @@
 				5A0B95E01D23B4C800EF3E02 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5A0B95E11D23B4C800EF3E02 /* Build configuration list for PBXNativeTarget "MessageJsonTests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +503,7 @@
 				5A0B95E31D23B4C800EF3E02 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5A0B95E41D23B4C800EF3E02 /* Build configuration list for PBXNativeTarget "MessageJsonUITests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +512,7 @@
 				5A0B95E61D23B4C800EF3E02 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

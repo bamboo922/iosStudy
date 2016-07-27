@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="D0A-vE-JY8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="D0A-vE-JY8">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -13,7 +13,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" text="" id="F51-7j-cdr">
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="搜索" id="8Ev-Z3-jj6">
                             <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
@@ -56,12 +56,11 @@
                                 </connections>
                             </tableViewCell>
                         </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="uRF-3e-ZdE" id="It4-ZN-ZX0"/>
-                            <outlet property="delegate" destination="uRF-3e-ZdE" id="G0g-Xb-CQ9"/>
-                        </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="信息" id="XIy-Wl-yBT"/>
+                    <connections>
+                        <outlet property="messageSearchBar" destination="8Ev-Z3-jj6" id="zk1-tC-OT9"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YPO-Kd-Nsn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
