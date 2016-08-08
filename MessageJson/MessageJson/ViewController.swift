@@ -15,7 +15,8 @@ class ViewController: UITableViewController,UISearchBarDelegate{
     let Timeformatter = NSDateFormatter() //实例化一个设置时间的类
     let TodayDate = NSDate() //实例化一个时间的类
     
-    @IBOutlet weak var messageSearchBar: UISearchBar!
+    @IBOutlet var messageSearchBar: UISearchBar!
+    @IBOutlet var messageTableView: UITableView!
     
     
     //将json文件作为字典传出
@@ -111,14 +112,10 @@ class ViewController: UITableViewController,UISearchBarDelegate{
         // Do any additional setup after loading the view, typically from a nib.
         sortDate()
         
-        //searchArray = messages
         //设置searchBar代理
         self.messageSearchBar.delegate = self
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        messageSearchBar.showsCancelButton = true
-        
-        //self.tableView.registerClass(MessageTableViewCell.self, forCellReuseIdentifier: "messageCell")
+        self.messageTableView.delegate = self
+        self.messageTableView.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -132,86 +129,137 @@ class ViewController: UITableViewController,UISearchBarDelegate{
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //设置短信的数量为列表的行数
-        return messages.count
+        //判断搜索后的数组中是否有值 也就是判断是否已经搜索
+        if (searchArray.isEmpty){
+            //无值 则设置短信的数量为列表的行数
+            return messages.count
+        }
+        else{
+            //有值 则设置搜索出来的短信数量为行数
+            return searchArray.count
+        }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         //将每一行与MessageTableViewCell类联系起来
         let cell = tableView.dequeueReusableCellWithIdentifier("messageCell") as! MessageTableViewCell
-        //将每行的内容放入message
-        let message = messages[indexPath.row] as! [String : AnyObject]
-        //将日期字符串转为日期
-        Timeformatter.dateFormat = "yyyy-MM-dd HH:mm"
-        let messageTime = message["time"] as! String
-        let messageTime2 = Timeformatter.dateFromString(messageTime)
+        
+        //判断搜索后的数组中是否有值 也就是判断是否已经搜索
+        if (searchArray.isEmpty){
+            //无值 则在cell中放短信的内容
+            //将每行的内容放入message
+            let message = messages[indexPath.row] as! [String : AnyObject]
+            cell.FromLabel.text = message["from"] as? String
+            cell.BodyLabel.text = message["body"] as? String
+                
+            //将日期字符串转为日期
+            Timeformatter.dateFormat = "yyyy-MM-dd HH:mm"
+            let timeZone = NSTimeZone(name: "UTC")
+            Timeformatter.timeZone = timeZone
+            let messageTime = message["time"] as! String
+            let messageTime2 = Timeformatter.dateFromString(messageTime)
             
-        //计算两日期相差的天数
-        let second = TodayDate.timeIntervalSinceDate(messageTime2!)
-        let days = (Double(second)) / 86400
+            //计算两日期相差的天数
+            let second = TodayDate.timeIntervalSinceDate(messageTime2!)
+            let days = (Double(second)) / 86400
             
-        //天数小于0.5时 显示几分几秒
-        if (days < 0.5){
-            Timeformatter.dateFormat = "HH:mm"
-            let theTime = Timeformatter.stringFromDate(messageTime2!)
-            cell.TimeLabel.text = theTime
+            //天数小于0.5时 显示几分几秒
+            if (days < 0.5){
+                Timeformatter.dateFormat = "HH:mm"
+                let theTime = Timeformatter.stringFromDate(messageTime2!)
+                cell.TimeLabel.text = theTime
+            }
+                    
+            //大于0.5小于1.5时 显示昨天
+            else if (days > 0.5 && days < 1.5){
+                cell.TimeLabel.text = "昨天"
+            }
+                    
+            //大于1.5小于8时 显示星期几
+            else if (days > 1.5 && days < 7){
+                Timeformatter.dateFormat = "EEEE"
+                let weeks = Timeformatter.stringFromDate(messageTime2!)
+                cell.TimeLabel.text = weeks
+            }
+                    
+            //大于8时 显示年月日
+            else if (days > 7){
+                Timeformatter.dateFormat = "yy/M/dd"
+                let theDate = Timeformatter.stringFromDate(messageTime2!)
+                cell.TimeLabel.text = theDate
+            }
         }
+            
+        else{
+            //有值 则在cell中放搜索后的短信内容
+            let message = searchArray[indexPath.row] as! [String : AnyObject]
+            
+            cell.FromLabel.text = message["from"] as? String
+            cell.BodyLabel.text = message["body"] as? String
+            
+            //将日期字符串转为日期
+            Timeformatter.dateFormat = "yyyy-MM-dd HH:mm"
+            let timeZone = NSTimeZone(name: "UTC")
+            Timeformatter.timeZone = timeZone
+            let messageTime = message["time"] as! String
+            let messageTime2 = Timeformatter.dateFromString(messageTime)
+            
+            //计算两日期相差的天数
+            let second = TodayDate.timeIntervalSinceDate(messageTime2!)
+            let days = (Double(second)) / 86400
+            
+            //天数小于0.5时 显示几分几秒
+            if (days < 0.5){
+                Timeformatter.dateFormat = "HH:mm"
+                let theTime = Timeformatter.stringFromDate(messageTime2!)
+                cell.TimeLabel.text = theTime
+            }
                 
-        //大于0.5小于1.5时 显示昨天
-        else if (days > 0.5 && days < 1.5){
-            cell.TimeLabel.text = "昨天"
-        }
+            //大于0.5小于1.5时 显示昨天
+            else if (days > 0.5 && days < 1.5){
+                cell.TimeLabel.text = "昨天"
+            }
                 
-        //大于1.5小于8时 显示星期几
-        else if (days > 1.5 && days < 8){
-            Timeformatter.dateFormat = "EEEE"
-            let weeks = Timeformatter.stringFromDate(messageTime2!)
-            cell.TimeLabel.text = weeks
-        }
+            //大于1.5小于8时 显示星期几
+            else if (days > 1.5 && days < 7){
+                Timeformatter.dateFormat = "EEEE"
+                let weeks = Timeformatter.stringFromDate(messageTime2!)
+                cell.TimeLabel.text = weeks
+            }
                 
-        //大于8时 显示年月日
-        else if (days > 8){
-            Timeformatter.dateFormat = "yy/M/dd"
-            let theDate = Timeformatter.stringFromDate(messageTime2!)
-            cell.TimeLabel.text = theDate
+            //大于8时 显示年月日
+            else if (days > 7){
+                Timeformatter.dateFormat = "yy/M/dd"
+                let theDate = Timeformatter.stringFromDate(messageTime2!)
+                cell.TimeLabel.text = theDate
+            }
         }
         
-        cell.FromLabel.text = message["from"] as? String
-        cell.BodyLabel.text = message["body"] as? String
-
         return cell
-        
     }
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        //print(searchText)
-        
+        print(searchText)
         //如果搜索词为空 则搜索列表保持不变
         if searchText == " " {
             self.searchArray = self.messages
         }
-        else { // 匹配用户输入内容的前缀(不区分大小写)
+        else{ 
             self.searchArray = []
             for i in 0 ..< (messages.count - 1){
-               let searchResult = messages[i] as! [String : AnyObject]
+                let searchResult = messages[i] as! [String : AnyObject]
+                //遍历字典中的值
                 for value in searchResult.values{
-                   if String(value).lowercaseString.hasPrefix(searchText.lowercaseString)
-                    {
+                    //判断字典中的值是否包括搜索词
+                    if String(value).containsString(searchText){
                         self.searchArray.append(messages[i])
                     }
                 }
             }
         }
-        
-        self.tableView.reloadData()
+        //刷新界面
+        self.messageTableView.reloadData()
     }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
-    
-
-
 }
     
     
