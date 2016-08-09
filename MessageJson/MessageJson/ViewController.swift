@@ -17,10 +17,10 @@ class ViewController: UITableViewController,UISearchBarDelegate{
     
     @IBOutlet var messageSearchBar: UISearchBar!
     @IBOutlet var messageTableView: UITableView!
-    
-    
+
     //将json文件作为字典传出
     func loadJSON(fileName: String) -> [String:AnyObject] {
+        
         let fileUrl : NSURL = NSBundle.mainBundle().URLForResource(fileName, withExtension: "json")!
         
         let jsonData = NSData(contentsOfURL: fileUrl)
@@ -237,6 +237,18 @@ class ViewController: UITableViewController,UISearchBarDelegate{
         
         return cell
     }
+    
+    //左滑删除
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            messages.removeAtIndex(indexPath.row)
+            messageTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        }
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
@@ -259,6 +271,20 @@ class ViewController: UITableViewController,UISearchBarDelegate{
         }
         //刷新界面
         self.messageTableView.reloadData()
+    }
+    
+    //点击搜索键时 触发键盘隐藏
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        messageSearchBar.resignFirstResponder()
+    }
+    
+    //点击Cancel键时 触发键盘隐藏
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        messageSearchBar.resignFirstResponder()
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        messageSearchBar.resignFirstResponder()
     }
 }
     
