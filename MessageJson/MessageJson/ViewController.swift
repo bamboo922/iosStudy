@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ViewController: UITableViewController,UISearchBarDelegate{
+class ViewController: UITableViewController,
+UISearchBarDelegate{
     
     var messages : [AnyObject] = [] //创建空数组messages
     var searchArray : [AnyObject] = [] //创建空数组searchArray
@@ -17,7 +18,9 @@ class ViewController: UITableViewController,UISearchBarDelegate{
     
     @IBOutlet var messageSearchBar: UISearchBar!
     @IBOutlet var messageTableView: UITableView!
-
+    @IBOutlet weak var editingButton: UIBarButtonItem!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
+    
     //将json文件作为字典传出
     func loadJSON(fileName: String) -> [String:AnyObject] {
         
@@ -65,7 +68,8 @@ class ViewController: UITableViewController,UISearchBarDelegate{
         }
         //将排列好的数组放入空数组messages
         messages = messageArray
-        
+    }
+    
         //按日期排列数组方法二 sort闭包函数
         //取数组的两个对象
         //let messageOrder = messageArray.sort{(first,second)->Bool in
@@ -88,7 +92,7 @@ class ViewController: UITableViewController,UISearchBarDelegate{
             //}
         //}
         //messages = messageOrder
-    }
+    
     
     //练习冒泡排序
     static func sortArray(orderArray:[Int]) -> [Int]{
@@ -116,6 +120,7 @@ class ViewController: UITableViewController,UISearchBarDelegate{
         self.messageSearchBar.delegate = self
         self.messageTableView.delegate = self
         self.messageTableView.dataSource = self
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -234,24 +239,11 @@ class ViewController: UITableViewController,UISearchBarDelegate{
                 cell.TimeLabel.text = theDate
             }
         }
-        
         return cell
     }
     
-    //左滑删除
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.Delete {
-            messages.removeAtIndex(indexPath.row)
-            messageTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-        }
-    }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
         //如果搜索词为空 则搜索列表保持不变
         if searchText == " " {
             self.searchArray = self.messages
@@ -265,6 +257,7 @@ class ViewController: UITableViewController,UISearchBarDelegate{
                     //判断字典中的值是否包括搜索词
                     if String(value).containsString(searchText){
                         self.searchArray.append(messages[i])
+                        break
                     }
                 }
             }
@@ -283,9 +276,62 @@ class ViewController: UITableViewController,UISearchBarDelegate{
         messageSearchBar.resignFirstResponder()
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        messageSearchBar.resignFirstResponder()
+    //点击编辑按钮时 进入编辑模式
+    @IBAction func editingMessage(sender: AnyObject) {
+        //标题为编辑时 变为取消
+        if (editingButton.title == "编辑"){
+            messageTableView.editing = true
+            editingButton.title = "取消"
+        }
+        //标题为取消时 变为编辑
+        else if (editingButton.title == "取消"){
+            messageTableView.editing = false
+            editingButton.title = "编辑"
+        }
     }
+    
+    //删除多项信息
+    @IBAction func deletemoreMessage(sender: AnyObject){
+        //选中的行
+        let selectRow = messageTableView.indexPathsForSelectedRows!
+        //逆向遍历数组
+        for i in (0 ..< (selectRow.count)).reverse() {
+            //删除数组中的对应元素
+            messages.removeAtIndex(selectRow[i].row)
+        }
+        //删除对应行信息
+        messageTableView.deleteRowsAtIndexPaths(messageTableView.indexPathsForSelectedRows!, withRowAnimation: UITableViewRowAnimation.Automatic)
+    }
+    
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        //当列表为编辑模式时 则进入多项选择
+        if (messageTableView.editing == true){
+            messageTableView.allowsSelectionDuringEditing = true
+            return UITableViewCellEditingStyle.init(rawValue: UITableViewCellEditingStyle.Insert.rawValue | UITableViewCellEditingStyle.Delete.rawValue)!
+        }
+        //不是编辑模式时 则单项删除（左滑得到删除选项）
+        else{
+            return UITableViewCellEditingStyle.Delete
+        }
+    }
+    
+    //左滑删除
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        //点击删除键后 删除此行信息（单项删除）
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            //删除数组中的对应元素
+            messages.removeAtIndex(indexPath.row)
+            //删除对应行
+            messageTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        }
+    }
+    
+    //把delete改成汉字”删除“
+    override func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
+        return "删除"
+    }
+
+    
 }
     
     
