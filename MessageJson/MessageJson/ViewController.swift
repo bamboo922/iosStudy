@@ -121,6 +121,7 @@ UISearchBarDelegate{
         self.messageTableView.delegate = self
         self.messageTableView.dataSource = self
         
+        messageTableView.editing = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -148,7 +149,7 @@ UISearchBarDelegate{
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         //将每一行与MessageTableViewCell类联系起来
         let cell = tableView.dequeueReusableCellWithIdentifier("messageCell") as! MessageTableViewCell
-        
+
         //判断搜索后的数组中是否有值 也就是判断是否已经搜索
         if (searchArray.isEmpty){
             //无值 则在cell中放短信的内容
@@ -288,25 +289,38 @@ UISearchBarDelegate{
             messageTableView.editing = false
             editingButton.title = "编辑"
         }
+        messageTableView.allowsMultipleSelection = true
     }
     
     //删除多项信息
     @IBAction func deletemoreMessage(sender: AnyObject){
-        //选中的行
-        let selectRow = messageTableView.indexPathsForSelectedRows!
-        //逆向遍历数组
-        for i in (0 ..< (selectRow.count)).reverse() {
-            //删除数组中的对应元素
-            messages.removeAtIndex(selectRow[i].row)
+        if(messageTableView.editing == true){
+            //选中的行
+            let selectRow = messageTableView.indexPathsForSelectedRows!
+            //逆向遍历数组
+            for i in (0 ..< (selectRow.count)).reverse() {
+                //删除数组中的对应元素
+                messages.removeAtIndex(selectRow[i].row)
+            }
+            //删除对应行信息
+            messageTableView.deleteRowsAtIndexPaths(messageTableView.indexPathsForSelectedRows!, withRowAnimation: UITableViewRowAnimation.Automatic)
         }
-        //删除对应行信息
-        messageTableView.deleteRowsAtIndexPaths(messageTableView.indexPathsForSelectedRows!, withRowAnimation: UITableViewRowAnimation.Automatic)
+    }
+    
+    
+    //选择所有信息
+    @IBAction func selectAllMessage(sender: AnyObject) {
+        if(messageTableView.editing == true){
+            let bbb = messageTableView.indexPathsForVisibleRows!
+            for i in 0 ..< (bbb.count - 1){
+                print(bbb[i].row)
+            }
+        }
     }
     
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         //当列表为编辑模式时 则进入多项选择
         if (messageTableView.editing == true){
-            messageTableView.allowsSelectionDuringEditing = true
             return UITableViewCellEditingStyle.init(rawValue: UITableViewCellEditingStyle.Insert.rawValue | UITableViewCellEditingStyle.Delete.rawValue)!
         }
         //不是编辑模式时 则单项删除（左滑得到删除选项）

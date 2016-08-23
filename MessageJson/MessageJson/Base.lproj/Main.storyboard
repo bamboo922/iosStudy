@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--信息-->
@@ -63,11 +64,18 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="信息" id="pCl-hD-iGi" userLabel="信息">
-                        <barButtonItem key="leftBarButtonItem" title="编辑" id="EvW-Tn-8bh">
-                            <connections>
-                                <action selector="editingMessage:" destination="7s7-p2-RQ7" id="Yv6-tB-8jk"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem title="编辑" id="EvW-Tn-8bh">
+                                <connections>
+                                    <action selector="editingMessage:" destination="7s7-p2-RQ7" id="Yv6-tB-8jk"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="全选" id="MbH-wg-sgX">
+                                <connections>
+                                    <action selector="selectAllMessage:" destination="7s7-p2-RQ7" id="01v-WB-g1p"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" title="删除" id="Awe-Sm-XpV">
                             <connections>
                                 <action selector="deletemoreMessage:" destination="7s7-p2-RQ7" id="vqr-yf-CK4"/>
