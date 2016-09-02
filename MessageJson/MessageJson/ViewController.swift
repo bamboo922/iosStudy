@@ -157,7 +157,7 @@ UISearchBarDelegate{
             let message = messages[indexPath.row] as! [String : AnyObject]
             cell.FromLabel.text = message["from"] as? String
             cell.BodyLabel.text = message["body"] as? String
-                
+            
             //将日期字符串转为日期
             Timeformatter.dateFormat = "yyyy-MM-dd HH:mm"
             let timeZone = NSTimeZone(name: "UTC")

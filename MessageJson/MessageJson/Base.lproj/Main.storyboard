@@ -56,6 +56,14 @@
                                     <outlet property="TimeLabel" destination="Cl7-1w-ZYW" id="CPe-CH-wCl"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="8Nd-9B-tcK">
+                                <rect key="frame" x="0.0" y="215" width="320" height="79"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Nd-9B-tcK" id="V3Q-my-u4H">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="78"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="7s7-p2-RQ7" id="A6V-Nq-zm3"/>
