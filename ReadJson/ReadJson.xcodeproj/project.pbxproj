@@ -200,13 +200,16 @@
 					5AE8C0561D222DBD00C27142 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 37L4U5MQG5;
+						LastSwiftMigration = 0800;
 					};
 					5AE8C06A1D222DBE00C27142 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 5AE8C0561D222DBD00C27142;
 					};
 					5AE8C0751D222DBE00C27142 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 5AE8C0561D222DBD00C27142;
 					};
 				};
@@ -415,6 +418,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = sush.ReadJson;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -429,6 +433,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = sush.ReadJson;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -440,6 +445,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sush.ReadJsonTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReadJson.app/ReadJson";
 			};
 			name = Debug;
@@ -452,6 +458,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sush.ReadJsonTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReadJson.app/ReadJson";
 			};
 			name = Release;
@@ -463,6 +470,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sush.ReadJsonUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = ReadJson;
 			};
 			name = Debug;
@@ -474,6 +482,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sush.ReadJsonUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = ReadJson;
 			};
 			name = Release;

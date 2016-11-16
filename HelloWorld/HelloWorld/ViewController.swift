@@ -22,8 +22,8 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func wordscolor(sender: AnyObject) {
-    twowords.textColor = UIColor.redColor()
+    @IBAction func wordscolor(_ sender: AnyObject) {
+    twowords.textColor = UIColor.red
         
     }
 
