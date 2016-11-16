@@ -38,7 +38,7 @@ class ViewController: UIViewController {
     var intResult : String = ""
     var exitSimbol : Bool = false
 
-    func inputNumber(number:String){
+    func inputNumber(_ number:String){
         if exitSimbol == false {
             beforeNumber = self.displayNum1.text!
             firstNumber = beforeNumber + number
@@ -51,57 +51,57 @@ class ViewController: UIViewController {
         }
     }
     
-    func inputSimbol(simbol:String){
+    func inputSimbol(_ simbol:String){
         Fuhao = simbol
         exitSimbol = true
         self.displaySimbol.text = simbol
     }
     
-    @IBAction func num1(sender: AnyObject) {
+    @IBAction func num1(_ sender: AnyObject) {
         inputNumber("1")
     }
     
-    @IBAction func num2(sender: AnyObject) {
+    @IBAction func num2(_ sender: AnyObject) {
         inputNumber("2")
     }
 
-    @IBAction func num3(sender: AnyObject) {
+    @IBAction func num3(_ sender: AnyObject) {
         inputNumber("3")
     }
     
-    @IBAction func num4(sender: AnyObject) {
+    @IBAction func num4(_ sender: AnyObject) {
         inputNumber("4")
     }
     
-    @IBAction func num5(sender: AnyObject) {
+    @IBAction func num5(_ sender: AnyObject) {
         inputNumber("5")
     }
 
-    @IBAction func num6(sender: AnyObject) {
+    @IBAction func num6(_ sender: AnyObject) {
         inputNumber("6")
     }
     
-    @IBAction func num7(sender: AnyObject) {
+    @IBAction func num7(_ sender: AnyObject) {
         inputNumber("7")
     }
     
-    @IBAction func num8(sender: AnyObject) {
+    @IBAction func num8(_ sender: AnyObject) {
         inputNumber("8")
     }
     
-    @IBAction func num9(sender: AnyObject) {
+    @IBAction func num9(_ sender: AnyObject) {
         inputNumber("9")
     }
 
-    @IBAction func num0(sender: AnyObject) {
+    @IBAction func num0(_ sender: AnyObject) {
         inputNumber("0")
     }
     
-    @IBAction func point(sender: AnyObject) {
+    @IBAction func point(_ sender: AnyObject) {
         inputNumber(".")
     }
     
-    @IBAction func delet(sender: AnyObject) {
+    @IBAction func delet(_ sender: AnyObject) {
         self.displayNum1.text = ""
         self.displayNum2.text = ""
         self.displaySimbol.text = ""
@@ -109,27 +109,27 @@ class ViewController: UIViewController {
         exitSimbol = false
     }
     
-    @IBAction func plus(sender: AnyObject) {
+    @IBAction func plus(_ sender: AnyObject) {
         inputSimbol("+")
     }
     
-    @IBAction func minus(sender: AnyObject) {
+    @IBAction func minus(_ sender: AnyObject) {
         inputSimbol("-")
     }
     
-    @IBAction func multiple(sender: AnyObject) {
+    @IBAction func multiple(_ sender: AnyObject) {
         inputSimbol("*")
     }
     
-    @IBAction func devide(sender: AnyObject) {
+    @IBAction func devide(_ sender: AnyObject) {
         inputSimbol("/")
     }
     
-    @IBAction func dengyu(sender: AnyObject) {
+    @IBAction func dengyu(_ sender: AnyObject) {
          exitSimbol = false
          if (Fuhao == "+"){
-            if(firstNumber.containsString(".") == false){
-                if(secondNumber.containsString(".") == false){
+            if(firstNumber.contains(".") == false){
+                if(secondNumber.contains(".") == false){
                     result = Int(firstNumber)! + Int(secondNumber)!
                     self.displayResult.text = "\(result)"
                 }
@@ -138,8 +138,8 @@ class ViewController: UIViewController {
                     self.displayResult.text = "\(finalResult)"
                 }
             }
-            else if(firstNumber.containsString(".") == true){
-                if(secondNumber.containsString(".") == true){
+            else if(firstNumber.contains(".") == true){
+                if(secondNumber.contains(".") == true){
                     finalResult = Double(firstNumber)! + Double(secondNumber)!
                     self.displayResult.text = "\(finalResult)"
                 }
@@ -151,8 +151,8 @@ class ViewController: UIViewController {
          }
         
          else if (Fuhao == "-"){
-            if(firstNumber.containsString(".") == false){
-                if(secondNumber.containsString(".") == false){
+            if(firstNumber.contains(".") == false){
+                if(secondNumber.contains(".") == false){
                     result = Int(firstNumber)! - Int(secondNumber)!
                     self.displayResult.text = "\(result)"
                 }
@@ -161,8 +161,8 @@ class ViewController: UIViewController {
                     self.displayResult.text = "\(finalResult)"
                 }
             }
-            else if(firstNumber.containsString(".") == true){
-                if(secondNumber.containsString(".") == true){
+            else if(firstNumber.contains(".") == true){
+                if(secondNumber.contains(".") == true){
                     finalResult = Double(firstNumber)! - Double(secondNumber)!
                     self.displayResult.text = "\(finalResult)"
                 }
@@ -174,8 +174,8 @@ class ViewController: UIViewController {
          }
         
          else if (Fuhao == "*"){
-            if(firstNumber.containsString(".") == false){
-                if(secondNumber.containsString(".") == false){
+            if(firstNumber.contains(".") == false){
+                if(secondNumber.contains(".") == false){
                     result = Int(firstNumber)! * Int(secondNumber)!
                     self.displayResult.text = "\(result)"
                 }
@@ -184,8 +184,8 @@ class ViewController: UIViewController {
                     self.displayResult.text = "\(finalResult)"
                 }
             }
-            else if(firstNumber.containsString(".") == true){
-                if(secondNumber.containsString(".") == true){
+            else if(firstNumber.contains(".") == true){
+                if(secondNumber.contains(".") == true){
                     finalResult = Double(firstNumber)! * Double(secondNumber)!
                     self.displayResult.text = "\(finalResult)"
                 }
@@ -200,7 +200,7 @@ class ViewController: UIViewController {
             finalResult = Double(firstNumber)! / Double(secondNumber)!
             stringResult = String(finalResult)
             if(stringResult.hasSuffix(".0") == true){
-                intResult = stringResult.stringByReplacingOccurrencesOfString(".0",withString: "")
+                intResult = stringResult.replacingOccurrences(of: ".0",with: "")
                 self.displayResult.text = "\(intResult)"
             }
             else{
