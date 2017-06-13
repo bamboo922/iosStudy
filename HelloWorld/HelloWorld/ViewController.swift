@@ -10,8 +10,12 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var twowords: UILabel!
+    var number:[String] = []
 
+    @IBOutlet weak var input: UITextField!
+    @IBOutlet weak var export: UITextField!
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -22,10 +26,22 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func wordscolor(_ sender: AnyObject) {
-    twowords.textColor = UIColor.red
+    func calculate(){
+        print(number)
+        var shuzi = self.input.text
+        var i = 0
+        for i in 0..<number.count {
+            number[i] = shuzi!
+        }
         
     }
-
+    @IBAction func calculate(_ sender: Any) {
+        calculate()
+      
+    
+    }
+    
+    
+    
 }
 
